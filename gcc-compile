@@ -1,0 +1,38 @@
+#!/bin/bash
+make
+
+if [ $? == 0 ]
+then
+	./program
+else
+	tput setaf 1
+	tput bold
+	echo ''
+	echo 'Error compiling program'
+	tput sgr0
+fi
+#GCC:
+#	gcc -E -o file.i file.c 	//without #preprocessor
+#	gcc -S -o file.s file.i 	//assembler
+#	gcc -c -o file.o file.s 	//object before linker
+#	gcc file file.o 			//binary after linker
+#
+#	gcc -g -o file file.c		//generate with debug info
+#	gdb file core				//view debug info after program "file" crash
+#
+#ld:
+#	-lm  math library (#include <math.h>)
+#	-pthread POSIX threads library (#include <pthread.h>)
+#	-fopenmp OpenMP library (#include <omp.h>)
+
+#ELF analysis:
+#	ldd 				//required libraries
+#	dump, objdump		//ELF and object file info
+#	elfdump, readelf	//ELF info
+#	nm					//ELF symbol table
+#	truss				//required syscalls
+
+#OTHER:
+#	pldd		//process libraries
+#	pstack		//process stack
+#	pfiles		//process files

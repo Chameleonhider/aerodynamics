@@ -1,0 +1,108 @@
+#!/bin/bash
+gcc point.c point_mx_cell.c point_mx.c timer.c source.c -Wall -Ofast -pg -lSDL2 -lm -o program_perf
+
+if [ $? == 0 ]
+then
+	# TODO:
+	# pass testing parameters one by one
+	# make perf run multiple times
+	# save the output by `perf stat -e <param> ./program | grep <param>`
+	# declare -a array=("el1" "el2")
+	# for i in "${arr[@]}"
+	stat_cpu="cpu-clock cpu-cycles context-switches instructions branch-misses"
+	stat_cache="cache-misses alignment-faults page-faults L1-dcache-load-misses L1-icache-load-misses LLC-load-misses node-load-misses"
+	cmd="perf stat -e $stat_cpu $stat_cache ./program_perf"
+	cmd="perf stat -e cpu-clock ./program_perf"
+	echo $cmd
+	$cmd
+else
+	tput setaf 1
+	tput bold
+	echo ''
+	echo 'Error compiling program_perf'
+	tput sgr0
+fi
+
+# branch-instructions OR branches                    [Hardware event]
+# branch-misses                                      [Hardware event]
+# bus-cycles                                         [Hardware event]
+# cache-misses                                       [Hardware event]
+# cache-references                                   [Hardware event]
+# cpu-cycles OR cycles                               [Hardware event]
+# instructions                                       [Hardware event]
+# ref-cycles                                         [Hardware event]
+#
+# alignment-faults                                   [Software event]
+# bpf-output                                         [Software event]
+# context-switches OR cs                             [Software event]
+# cpu-clock                                          [Software event]
+# cpu-migrations OR migrations                       [Software event]
+# dummy                                              [Software event]
+# emulation-faults                                   [Software event]
+# major-faults                                       [Software event]
+# minor-faults                                       [Software event]
+# page-faults OR faults                              [Software event]
+# task-clock                                         [Software event]
+#
+# L1-dcache-load-misses                              [Hardware cache event]
+# L1-dcache-loads                                    [Hardware cache event]
+# L1-dcache-stores                                   [Hardware cache event]
+# L1-icache-load-misses                              [Hardware cache event]
+# LLC-load-misses                                    [Hardware cache event]
+# LLC-loads                                          [Hardware cache event]
+# LLC-store-misses                                   [Hardware cache event]
+# LLC-stores                                         [Hardware cache event]
+# branch-load-misses                                 [Hardware cache event]
+# branch-loads                                       [Hardware cache event]
+# dTLB-load-misses                                   [Hardware cache event]
+# dTLB-loads                                         [Hardware cache event]
+# dTLB-store-misses                                  [Hardware cache event]
+# dTLB-stores                                        [Hardware cache event]
+# iTLB-load-misses                                   [Hardware cache event]
+# iTLB-loads                                         [Hardware cache event]
+# node-load-misses                                   [Hardware cache event]
+# node-loads                                         [Hardware cache event]
+# node-store-misses                                  [Hardware cache event]
+# node-stores                                        [Hardware cache event]
+#
+# branch-instructions OR cpu/branch-instructions/    [Kernel PMU event]
+# branch-misses OR cpu/branch-misses/                [Kernel PMU event]
+# bus-cycles OR cpu/bus-cycles/                      [Kernel PMU event]
+# cache-misses OR cpu/cache-misses/                  [Kernel PMU event]
+# cache-references OR cpu/cache-references/          [Kernel PMU event]
+# cpu-cycles OR cpu/cpu-cycles/                      [Kernel PMU event]
+# cstate_core/c3-residency/                          [Kernel PMU event]
+# cstate_core/c6-residency/                          [Kernel PMU event]
+# cstate_core/c7-residency/                          [Kernel PMU event]
+# cstate_pkg/c2-residency/                           [Kernel PMU event]
+# cstate_pkg/c3-residency/                           [Kernel PMU event]
+# cstate_pkg/c6-residency/                           [Kernel PMU event]
+# cstate_pkg/c7-residency/                           [Kernel PMU event]
+# cycles-ct OR cpu/cycles-ct/                        [Kernel PMU event]
+# cycles-t OR cpu/cycles-t/                          [Kernel PMU event]
+# el-abort OR cpu/el-abort/                          [Kernel PMU event]
+# el-capacity OR cpu/el-capacity/                    [Kernel PMU event]
+# el-commit OR cpu/el-commit/                        [Kernel PMU event]
+# el-conflict OR cpu/el-conflict/                    [Kernel PMU event]
+# el-start OR cpu/el-start/                          [Kernel PMU event]
+# instructions OR cpu/instructions/                  [Kernel PMU event]
+# intel_bts//                                        [Kernel PMU event]
+# intel_pt//                                         [Kernel PMU event]
+# mem-loads OR cpu/mem-loads/                        [Kernel PMU event]
+# mem-stores OR cpu/mem-stores/                      [Kernel PMU event]
+# msr/aperf/                                         [Kernel PMU event]
+# msr/mperf/                                         [Kernel PMU event]
+# msr/pperf/                                         [Kernel PMU event]
+# msr/smi/                                           [Kernel PMU event]
+# msr/tsc/                                           [Kernel PMU event]
+# tx-abort OR cpu/tx-abort/                          [Kernel PMU event]
+# tx-capacity OR cpu/tx-capacity/                    [Kernel PMU event]
+# tx-commit OR cpu/tx-commit/                        [Kernel PMU event]
+# tx-conflict OR cpu/tx-conflict/                    [Kernel PMU event]
+# tx-start OR cpu/tx-start/                          [Kernel PMU event]
+#
+# rNNN                                               [Raw hardware event descriptor]
+# cpu/t1=v1[,t2=v2,t3 ...]/modifier                  [Raw hardware event descriptor]
+#  (see 'man perf-list' on how to encode it)
+#
+# mem:<addr>[/len][:access]                          [Hardware breakpoint]
