@@ -1,21 +1,27 @@
 About:
-This is a little physics program. Lots of features missing.
-Uses object pools and space partitioning to considerably speed up the simulation.
-Uses NACA 4 digit wing generator.
+	This is a little physics program. Lots of features missing.
+	Uses object pools and space partitioning to considerably speed up the simulation.
+	Uses NACA 4 digit wing generator.
 
 Install/compile:
-You may need to install 'libsdl2-dev' (you should already have 'libm')
-Compile and launch the program with 'gcc-compile' or use 'make && ./program'
+	You may need to install 'libsdl2-dev' (you should already have 'libm')
+	Compile and launch the program with 'gcc-compile' or use 'make && ./program'
+	Tested on Linux Ubuntu 16.04 on arm64 (i7-6700)
 
 Controls:
-SPACEBAR - frame skip, i.e. run faster than 60fps, useful at simulation start
-MOUSE LEFT - add particles
-MOUSE MIDDLE - speed up nearby particles in the current space partition
-MOUSE RIGHT - delete particles from current space partition
+	SPACEBAR - frame skip, i.e. run faster than 60fps, useful at simulation start
+	MOUSE LEFT - add particles
+	MOUSE MIDDLE - colour particles in current space partition
+	MOUSE RIGHT - delete particles from current space partition
+	ARROW UP/DOWN - rotate the airfoil
+	Q - quit
 
-Tested on Linux Ubuntu 16.04 on arm64
-
------ ----- -----
+Planned features:
+	more NACA wing generators
+	better physics (speed of sound, Reynolds number, etc.)
+	physics multithreading with pthreads
+	ditch the particles; make quadtrees, with leaf nodes handling pressure/velocity
+	if simulation runs fast enough, make a game out of it
 
 LICENSE GNU GPL v3
 Algirdas Palubinskas 2018

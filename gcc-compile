@@ -3,7 +3,7 @@ make
 
 if [ $? == 0 ]
 then
-	./program
+	nice -n -20 ./program
 else
 	tput setaf 1
 	tput bold

@@ -74,6 +74,8 @@ void pt_mx_redistribute(point_mx_type *pt_mx);
 // x, y - location of the point
 // vx, vy - velocity of the point
 uint pt_mx_point(point_mx_type *pt_mx, double x, double y, double vx, double vy);
+// col - colour of the point
+uint pt_mx_point_col(point_mx_type *pt_mx, double x, double y, double vx, double vy, uint col);
 // delete "index" particle from the matrix
 // pt_mx - the matrix
 // index - used_stack index in pt_mx.h

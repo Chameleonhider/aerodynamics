@@ -12,6 +12,8 @@ typedef struct point_type {
 	double vy;
 	uint time; // time in milliseconds lived
 
+	uint col;
+
 	// information
 	uint mxc_xind; // x index of point cointainer
 	uint mxc_yind; // y index of point cointainer

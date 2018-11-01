@@ -98,9 +98,12 @@ void pt_mx_redistribute(point_mx_type *pt_mx){
 }
 
 uint pt_mx_point(point_mx_type *pt_mx, double x, double y, double vx, double vy){
+	return pt_mx_point_col(pt_mx, x, y, vx, vy, 0x00000000);
+}
+uint pt_mx_point_col(point_mx_type *pt_mx, double x, double y, double vx, double vy, uint col){
 	if (pt_mx->stack_count == pt_mx->size){
 		printf("%s:%i: pt_mx_point(): Matrix ran out of points.\n", __FILE__, __LINE__);
-		return;
+		return 0;
 	}
 	uint index = pt_mx->free_stack[pt_mx->stack_count];
 	pt_mx->used_stack[pt_mx->stack_count] = index;
@@ -111,6 +114,7 @@ uint pt_mx_point(point_mx_type *pt_mx, double x, double y, double vx, double vy)
 	pt_mx->point[index].vx = vx;
 	pt_mx->point[index].vy = vy;
 	pt_mx->point[index].time = pt_mx->life;
+	pt_mx->point[index].col = col;
 	pt_mx_cell_index(pt_mx, x, y, &pt_mx->point[index].mxc_xind, &pt_mx->point[index].mxc_yind);
 	pt_mx->point[index].mxc_ind = pt_mxc_point(&pt_mx->cell_x[pt_mx->point[index].mxc_xind][pt_mx->point[index].mxc_yind], index);
 	return index;
